@@ -9,14 +9,20 @@
 <body style="margin: 0; padding: 0; background-color: #222; display: flex; justify-content: center; align-items: center; height: 100vh;">
 
     <script>
-        // Initialize CheerpJ
-        cheerpjInit();
+        // Use an async function to enforce the sequential execution of the runtime loading sequence
+        async function runGame() {
+            // 1. Wait for CheerpJ to fully initialize the virtual environment
+            await cheerpjInit();
 
-        // Create the graphical display area for your Swing UI
-        cheerpjCreateDisplay(-1, -1); 
+            // 2. Create the display canvas for the Swing GUI
+            cheerpjCreateDisplay(-1, -1); 
 
-        // Run your specific JAR file from the root directory
-        cheerpjRunJar("/app/SharksAndMinnowsWeb.jar");
+            // 3. Execute the target JAR from the root folder
+            await cheerpjRunJar("/app/SharksAndMinnowsWeb.jar");
+        }
+
+        // Execute the function string on page load
+        runGame();
     </script>
 
 </body>
